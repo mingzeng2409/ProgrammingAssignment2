@@ -29,16 +29,14 @@ list(set = set, get = get,
      getInverse = getInverse)
 }
 ## This function computes the inverse of the special "matrix" returned by makeCacheMatrix above.
-cacheSolve <-function(x, ...) {
-  ## Return a matrix that is the inverse of 'x'
-  y <- x$getInverse()
-  if(!is.null(y)){
+cacheSolve <- function(x, ...) {
+  inv = x$getinv()
+  if(!is.null(inv)){
     message("getting cached data")
-    return(y)
+    return(inv)
   }
-  data <- x$get()
-  y <- solve(data)
-  x$setInverse(y)
-  ##return the matrix 
-  y     
+  data = x$get()
+  inv = solve(data, ...)
+  x$setinv(inv)
+  return(inv)
 }
